@@ -84,15 +84,18 @@ class About(models.Model):
         return self.about_text
 
 
-class Privacy_policy(models.Model):
+class PrivacyPolicy(models.Model):
     name = models.CharField(max_length=50)
     privacy_policy_text = RichTextUploadingField(blank=True, null=True,)
     
+    class Meta:
+        verbose_name_plural = "Privacy Policies"
+
     def __str__(self):
         return self.privacy_policy_text
 
-        
-class Terms_of_use(models.Model):
+
+class TermsOfUse(models.Model):
     name = models.CharField(max_length=50)
     terms_of_use_text = RichTextUploadingField(blank=True, null=True,)
     

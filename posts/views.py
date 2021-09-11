@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, About, PostView, Like, Comment, Terms_of_use,Privacy_policy
+from .models import Post, About, PostView, Like, Comment, TermsOfUse,PrivacyPolicy
 from .forms import PostForm, CommentForm
 
 class PostListView(ListView):
     model = Post
+    paginate_by = 1
 
 class AboutListView(ListView):
     model = About
@@ -17,22 +18,22 @@ class AboutListView(ListView):
 
 
 class Terms_of_useListView(ListView):
-    model = Terms_of_use
+    model = TermsOfUse
     template_name = 'terms_of_use.html'
     
     def get_context_data(self, **kwargs): 
         context = super().get_context_data(**kwargs)
-        context['terms_of_use'] = Terms_of_use.objects.all()
+        context['terms_of_use'] = TermsOfUse.objects.all()
         return context
 
 
 class Privacy_policyListView(ListView):
-    model = Privacy_policy
+    model = PrivacyPolicy
     template_name = 'privacy_policy.html'
     
     def get_context_data(self, **kwargs): 
         context = super().get_context_data(**kwargs)
-        context['privacy_policy'] = Privacy_policy.objects.all()
+        context['privacy_policy'] = PrivacyPolicy.objects.all()
         return context
 
 
