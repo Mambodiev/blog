@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<div class="container">
+{% comment %} <div class="container">
     <div class='row'>
     {% for object in object_list %}
         <div class="col-4">
@@ -29,5 +29,91 @@
         </div>
     {% endfor %}
     </div>
+</div> {% endcomment %}
+
+{% comment %} <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            {% for object in object_list %}
+            <div class="col-8">
+                
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        <a href="{{ object.get_absolute_url }}">{{ object.title }}
+                        </a>
+                        </h5>
+                        <p class="card-text">{{ object.content|truncatechars:40 }}</p>
+                        <hr />
+                        <p class="card-text">
+                            <span><i class="fas fa-comments ml-2"></i> {{ object.get_comment_count }}</span>
+                            <span><i class="fas fa-eye ml-2"></i> {{ object.get_view_count }}</span>
+                            <span><i class="fas fa-thumbs-up ml-2"></i> {{ object.get_like_count }}</span>
+                        </p>
+                        <p class="card-text">
+                            Posted {{ object.publish_date|timesince }} ago
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            
+        {% endfor %}
+        </div>
+    </div>
+</div> {% endcomment %}
+
+
+<div class="container">
+<div class="row mb-2">
+    {% for object in object_list %}
+    <div class="col-md-6">
+      <div class="row no-gutters overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <div class="col-auto d-none d-lg-block px-0">
+           <img src="{{ object.thumbnail.url }}" class="bd-placeholder-img  img-fluid" alt="...">
+          </div>
+          <strong class="d-inline-block my-3 text-primary">World</strong>
+          <h3 class="mb-3">{{ object.title }}</h3>
+          {% comment %} <div class="mb-1 text-muted">Posted {{ object.publish_date|timesince }} ago</div> {% endcomment %}
+          <p class="card-text mb-auto">{{ object.content|truncatechars:120 }}</p>
+          <a href="{{ object.get_absolute_url }}" class="stretched-link">Continue reading</a>
+          <p class="card-text my-3">
+            <span class='mr-2'>
+                <img src="{% static 'fonts/bootstrap-icons/chat-text.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_comment_count }}
+            </span>
+            <span class='mr-2'>
+                <img src="{% static 'fonts/bootstrap-icons/eye.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_view_count }}</span>
+            <span>
+                <img src="{% static 'fonts/bootstrap-icons/hand-thumbs-up.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_like_count }}
+            </span>
+          </p>
+          <div class="mb-1 text-muted">Posted {{ object.publish_date|timesince }} ago</div>
+        </div>
+        {% comment %} <div class="col-auto d-none d-lg-block">
+          <img src="{{ object.thumbnail.url }}" class="bd-placeholder-img  img-fluid" alt="...">
+        </div> {% endcomment %}
+      </div>
+    </div>
+    {% endfor %}
+
+
+    {% comment %} <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">Design</strong>
+          <h3 class="mb-0">Post title</h3>
+          <div class="mb-1 text-muted">Nov 11</div>
+          <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+        </div>
+      </div>
+    </div> {% endcomment %}
+  </div>
 </div>
 {% endblock content %}

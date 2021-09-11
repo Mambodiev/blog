@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.shortcuts import reverse
@@ -11,7 +12,7 @@ class User(AbstractUser):
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = RichTextUploadingField()
     thumbnail = models.ImageField()
     publish_date = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
@@ -73,3 +74,27 @@ class Like(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class About(models.Model):
+    name = models.CharField(max_length=50)
+    about_text = RichTextUploadingField()
+    
+    def __str__(self):
+        return self.about_text
+
+
+class Privacy_policy(models.Model):
+    name = models.CharField(max_length=50)
+    privacy_policy_text = RichTextUploadingField(blank=True, null=True,)
+    
+    def __str__(self):
+        return self.privacy_policy_text
+
+        
+class Terms_of_use(models.Model):
+    name = models.CharField(max_length=50)
+    terms_of_use_text = RichTextUploadingField(blank=True, null=True,)
+    
+    def __str__(self):
+        return self.terms_of_use_text

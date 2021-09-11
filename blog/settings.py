@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'ckeditor',
+    'ckeditor_uploader',
 
     'posts'
 ]
@@ -135,3 +137,22 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 AUTH_USER_MODEL = 'posts.User'
 LOGIN_REDIRECT_URL = '/'
+
+####################################
+    ##  CKEDITOR CONFIGURATION ##
+####################################
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'images/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
+
+###################################
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

@@ -1,10 +1,40 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, PostView, Like, Comment
+from .models import Post, About, PostView, Like, Comment, Terms_of_use,Privacy_policy
 from .forms import PostForm, CommentForm
 
 class PostListView(ListView):
     model = Post
+
+class AboutListView(ListView):
+    model = About
+    template_name = 'about.html'
+
+    def get_context_data(self, **kwargs): 
+        context = super().get_context_data(**kwargs)
+        context['about'] = About.objects.all()
+        return context
+
+
+class Terms_of_useListView(ListView):
+    model = Terms_of_use
+    template_name = 'terms_of_use.html'
+    
+    def get_context_data(self, **kwargs): 
+        context = super().get_context_data(**kwargs)
+        context['terms_of_use'] = Terms_of_use.objects.all()
+        return context
+
+
+class Privacy_policyListView(ListView):
+    model = Privacy_policy
+    template_name = 'privacy_policy.html'
+    
+    def get_context_data(self, **kwargs): 
+        context = super().get_context_data(**kwargs)
+        context['privacy_policy'] = Privacy_policy.objects.all()
+        return context
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -70,3 +100,5 @@ def like(request, slug):
         return redirect('detail', slug=slug)
     Like.objects.create(user=request.user, post=post)
     return redirect('detail', slug=slug)
+
+

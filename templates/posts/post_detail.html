@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
     <div class="container">
@@ -9,9 +10,15 @@
                 <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="...">
                 <hr />
                 <div>
-                    <span><i class="fas fa-comments ml-2"></i> {{ object.get_comment_count }}</span>
-                    <span><i class="fas fa-eye ml-2"></i> {{ object.get_view_count }}</span>
-                    <span><i class="fas fa-thumbs-up ml-2"></i> {{ object.get_like_count }}</span>
+                    <span class='mr-2'>
+                        <img src="{% static 'fonts/bootstrap-icons/chat-text.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_comment_count }}
+                    </span>
+                    <span class='mr-2'>
+                        <img src="{% static 'fonts/bootstrap-icons/eye.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_view_count }}
+                    </span>
+                    <span>
+                        <img src="{% static 'fonts/bootstrap-icons/hand-thumbs-up.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_like_count }}
+                    </span>
                     <span class='float-right'>Posted {{ object.publish_date|timesince }} ago</span>
                 </div>
                 <hr />
@@ -22,7 +29,7 @@
                 <div>
                     <h4>Enjoy this post? Give it a like</h4>
                     <a class="text-muted" href="{{ object.get_like_url }}">
-                    .<i class="fas fa-thumbs-up fa-lg"></i> 
+                    <img src="{% static 'fonts/bootstrap-icons/hand-thumbs-up.svg' %}" alt="Bootstrap" width="22" height="22"> 
                     {{ object.get_like_count }}
                     </a>
                     <hr />
