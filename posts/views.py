@@ -5,7 +5,7 @@ from .forms import PostForm, CommentForm
 
 class PostListView(ListView):
     model = Post
-    paginate_by = 1
+    paginate_by = 3
 
 class AboutListView(ListView):
     model = About

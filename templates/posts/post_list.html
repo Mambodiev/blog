@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="container px-4">
+{% comment %} <div class="container px-4">
     <div class="row mb-2">
         {% for object in object_list %}
         <div class="col-md-6">
@@ -13,7 +13,6 @@
                     </div>
                     <strong class="d-inline-block my-3 text-primary">World</strong>
                     <h3 class="mb-3">{{ object.title }}</h3>
-                    {% comment %} <div class="mb-1 text-muted">Posted {{ object.publish_date|timesince }} ago</div> {% endcomment %}
                     <p class="card-text mb-auto">{{ object.content|safe|truncatechars:120 }}</p>
                     <a href="{{ object.get_absolute_url }}" class="stretched-link">Continue reading</a>
                     <p class="card-text my-3">
@@ -33,6 +32,80 @@
         {% endfor %}
     </div>
     {% if page_obj.has_other_pages %}
+        <ul class="list-inline text-center">
+            {% if page_obj.has_previous %}
+                <li class="list-inline-item page"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="list-inline-item disabled page"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="list-inline-item active page ">
+                        <span class='page-item page-link active'>
+                        {{ i }}
+                            <span class='sr-only'>(current)</span>
+                        </span></li>
+                    {% else %}
+                        <li class="list-inline-item page"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="list-inline-item page"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="list-inline-item disabled page"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</div> {% endcomment %}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        {% for object in object_list %}
+        <div class="col-lg-8">
+            <div class="row no-gutters overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col d-flex flex-column position-static">
+                    <a class='text-decoration-none' href="{{ object.get_absolute_url }}">
+                        <h3 class="my-3 text-secondary">{{ object.title }}</h3>
+                    </a>
+
+                    <div class="my-3 text-muted">Updated {{ object.publish_date|timesince }} ago</div>
+
+                    <div class="col-auto d-none d-lg-block px-0 mb-4">
+                    <img src="{{ object.thumbnail.url }}" class="bd-placeholder-img  img-fluid" alt="...">
+                    </div>
+
+                    <p class="card-text mb-auto">{{ object.content|safe|truncatechars:320 }}</p>
+
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <p class="card-text my-3">
+                                <span class='mr-2'>
+                                    <img src="{% static 'fonts/bootstrap-icons/chat-text.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_comment_count }}
+                                </span>
+                                <span class='mr-2'>
+                                    <img src="{% static 'fonts/bootstrap-icons/eye.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_view_count }}</span>
+                                <span>
+                                    <img src="{% static 'fonts/bootstrap-icons/hand-thumbs-up.svg' %}" alt="Bootstrap" width="22" height="22"> {{ object.get_like_count }}
+                                </span>
+                            </p></li>
+                        <li class="list-inline-item">
+                            <a href="{{ object.get_absolute_url }}">
+                                <button type="button" class="btn btn-outline-success btn-lg">Continue reading</button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+        {% endfor %}
+    </div>
+        {% if page_obj.has_other_pages %}
         <ul class="list-inline text-center">
             {% if page_obj.has_previous %}
                 <li class="list-inline-item page"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
