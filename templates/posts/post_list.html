@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% block head_title %}Blog Website - Blog Design{% endblock head_title %}
 {% block content %}
 
 {% comment %} <div class="container px-4">
@@ -67,7 +68,7 @@
         <div class="col-lg-8">
             <div class="row no-gutters overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col d-flex flex-column position-static">
-                    <a class='text-decoration-none' href="{{ object.get_absolute_url }}">
+                    <a class='text-decoration-none' href="{{ object.get_absolute_url }}" title='link to blog detail'>
                         <h3 class="my-3 text-secondary">{{ object.title }}</h3>
                     </a>
 
