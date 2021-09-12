@@ -17,6 +17,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_BACKEND ='django.core.mail.backends.console.EmailBackend'
 
 # Application definition
 
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
 
     'posts'
 ]
+DEFAULT_FROM_EMAIL=env('DEFAULT_FROM_EMAIL')
+NOTIFY_EMAIL=env('NOTIFY_EMAIL')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

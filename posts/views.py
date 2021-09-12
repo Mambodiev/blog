@@ -1,7 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
+
+from django.conf import settings
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.views import generic
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, About, PostView, Like, Comment, TermsOfUse,PrivacyPolicy
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, ContactForm
+from django.utils.translation import gettext as _
 
 class PostListView(ListView):
     model = Post
@@ -103,3 +109,31 @@ def like(request, slug):
     return redirect('detail', slug=slug)
 
 
+class ContactView(generic.FormView):
+    form_class = ContactForm
+    template_name = 'contact.html'
+
+    def get_success_url(self):
+        return reverse("contact")
+
+    def form_valid(self, form):
+        messages.info(
+            self.request, "Thanks for getting in touch. We have received your message.")
+        name = form.cleaned_data.get(_('name'))
+        email = form.cleaned_data.get(_('email'))
+        message = form.cleaned_data.get(_('message'))
+
+        full_message = f"""
+            Received message below from {name}, {email}
+            ________________________
+
+
+            {message}
+            """
+        send_mail(
+            subject="Received contact form submission",
+            message=full_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.NOTIFY_EMAIL]
+        )
+        return super(ContactView, self).form_valid(form)

@@ -10,7 +10,7 @@
           <blockquote class="blockquote text-left">
           <a class="navbar-brand-footer text-uppercase mr-0 pt-0" href="{% url 'list' %}">ecom</a>
           <footer class="blockquote"><small>© 2021,<cite title="Source Title">Ecom</cite></small></footer>
-            <p class="mb-0"><ul class="list-inline">
+            {% comment %} <p class="mb-0"><ul class="list-inline">
               <li class="list-inline-item">
                   <img src="{% static 'fonts/bootstrap-icons/paypal-seeklogo.com.svg' %}" alt="paypal icon" width="60" height="30">
               </li>
@@ -20,7 +20,7 @@
               <li class="list-inline-item">
                   <img src="{% static 'fonts/bootstrap-icons/google-pay-seeklogo.com.svg' %}" alt="google-pay icon" width="60" height="30">
               </li>
-          </ul></p>
+          </ul></p> {% endcomment %}
             
           </blockquote>
       </div>
@@ -75,9 +75,9 @@
       <div class="col-6 col-md">
         <h5 class='text-black'>Follow us</h5>
           <div class="my-3">
-          <a class='mr-3 footer-icon' href="#!"></i><img src="{% static 'fonts/bootstrap-icons/facebook.svg' %}" alt="facebook"></a>
-          <a class='mr-3 footer-icon' href="#!"><img src="{% static 'fonts/bootstrap-icons/twitter.svg' %}" alt="twitter"></a>
-          <a class='mr-3 footer-icon' href="#!"><img src="{% static 'fonts/bootstrap-icons/youtube.svg' %}" alt="youtube"></a>
+          <a class='mr-2 footer-icon' href="#!"></i><img src="{% static 'fonts/bootstrap-icons/facebook.svg' %}" alt="facebook"></a>
+          <a class='mr-2 footer-icon' href="#!"><img src="{% static 'fonts/bootstrap-icons/twitter.svg' %}" alt="twitter"></a>
+          <a class='mr-0 footer-icon' href="#!"><img src="{% static 'fonts/bootstrap-icons/youtube.svg' %}" alt="youtube"></a>
           </div>
           <a href="#" class='text-primary my-3 text-decoration-none'>Back to top</a>
       </div>

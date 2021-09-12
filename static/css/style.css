@@ -418,7 +418,11 @@ min-height:430px;
   border-bottom: 0px solid #dee2e6;
 }
 
-
+@media (max-width: 767px) {
+  .padding-contact {
+    padding:1rem!important;
+  }
+}
 /* .label {
   display: none!important;
 } */

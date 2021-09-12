@@ -12,6 +12,7 @@ from posts.views import (
     AboutListView,
     Privacy_policyListView,
     Terms_of_useListView,
+    ContactView,
     like,
 )
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path('about/', AboutListView.as_view(), name='about'),
     path('privacy_policy/', Privacy_policyListView.as_view(), name='privacy_policy'),
     path('terms_of_use/', Terms_of_useListView.as_view(), name='terms_of_use'),
+    path('contact/', ContactView.as_view(), name='contact'),
     path('create/', PostCreateView.as_view(), name='create'),
     path('<slug>/', PostDetailView.as_view(), name='detail'),
     path('<slug>/update/', PostUpdateView.as_view(), name='update'),
